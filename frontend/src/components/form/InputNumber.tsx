@@ -1,42 +1,25 @@
-type InputNumberProps = {
+type Props = {
   label: string;
   value: number | "";
-  onChange: (value: number | "") => void;
-  placeholder?: string;
+  onChange: (value: number) => void;
 };
 
 export default function InputNumber({
   label,
   value,
   onChange,
-  placeholder,
-}: InputNumberProps) {
+}: Props) {
   return (
     <div className="flex flex-col gap-2">
-      <label className="font-medium text-gray-700">
-        {label}
-      </label>
+      <label>{label}</label>
 
       <input
         type="number"
         value={value}
-        placeholder={placeholder}
         onChange={(e) =>
-          onChange(
-            e.target.value === ""
-              ? ""
-              : Number(e.target.value)
-          )
+          onChange(Number(e.target.value))
         }
-        className="
-          rounded-lg
-          border
-          border-gray-300
-          px-4
-          py-3
-          outline-none
-          focus:border-blue-500
-        "
+        className="rounded-lg border p-3"
       />
     </div>
   );

@@ -1,25 +1,19 @@
-type ButtonProps = {
+type Props = {
   children: React.ReactNode;
   onClick?: () => void;
+  type?: "button" | "submit";
 };
 
 export default function Button({
   children,
   onClick,
-}: ButtonProps) {
+  type = "button",
+}: Props) {
   return (
     <button
+      type={type}
       onClick={onClick}
-      className="
-        bg-blue-600
-        text-white
-        px-6
-        py-3
-        rounded-lg
-        font-semibold
-        hover:bg-blue-700
-        transition
-      "
+      className="w-full rounded-xl bg-blue-600 px-4 py-3 text-white font-semibold hover:bg-blue-700 transition"
     >
       {children}
     </button>

@@ -1,5 +1,3 @@
-import Card from "../ui/Card";
-
 type Props = {
   title: string;
   value: string;
@@ -10,14 +8,14 @@ export default function ResultCard({
   value,
 }: Props) {
   return (
-    <Card className="text-center">
-      <h3 className="text-gray-500">
+    <div className="rounded-xl border p-6 bg-green-50">
+      <p className="text-gray-500">
         {title}
-      </h3>
-
-      <p className="text-3xl font-bold text-blue-600 mt-2">
-        {value}
       </p>
-    </Card>
+
+      <h2 className="text-3xl font-bold mt-2">
+        {value}
+      </h2>
+    </div>
   );
 }

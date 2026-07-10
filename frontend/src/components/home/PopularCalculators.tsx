@@ -1,33 +1,27 @@
-import Card from "@/src/components/ui/Card";
-import SectionTitle from "@/src/components/ui/SectionTitle";
+import Card from "../ui/Card";
+import SectionTitle from "../ui/SectionTitle";
 
 const calculators = [
   "Juros Compostos",
+  "Juros Simples",
+  "Porcentagem",
+  "Regra de Três",
   "Financiamento",
   "IMC",
-  "Porcentagem",
-  "Regra de 3",
-  "Idade",
 ];
 
 export default function PopularCalculators() {
   return (
-    <section className="py-16">
+    <section className="mt-16">
       <SectionTitle
         title="Calculadoras Populares"
-        subtitle="As mais utilizadas pelos usuários."
+        subtitle="As ferramentas mais utilizadas pelos usuários."
       />
 
-      <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-        {calculators.map((calc) => (
-          <Card key={calc}>
-            <h3 className="font-bold text-xl">
-              {calc}
-            </h3>
-
-            <p className="text-gray-600 mt-2">
-              Clique para acessar esta calculadora.
-            </p>
+      <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3 mt-8">
+        {calculators.map((calculator) => (
+          <Card key={calculator}>
+            <h3 className="font-semibold text-lg">{calculator}</h3>
           </Card>
         ))}
       </div>
