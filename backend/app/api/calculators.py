@@ -9,15 +9,12 @@ router = APIRouter()
 def compound_interest(
     capital: float,
     rate: float,
-    months: int
+    months: int,
+    monthly_contribution: float = 0,
 ):
-
-    result = calculate(
-        capital,
-        rate,
-        months
+    return calculate(
+        capital=capital,
+        rate=rate,
+        months=months,
+        monthly_contribution=monthly_contribution,
     )
-
-    return {
-        "final_amount": round(result, 2)
-    }
