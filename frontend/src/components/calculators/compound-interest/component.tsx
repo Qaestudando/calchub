@@ -2,6 +2,8 @@
 
 import { useMemo, useState } from "react";
 import Faq from "./Faq";
+import Article from "./Article";
+import RelatedCalculators from "./RelatedCalculators";
 
 import {
   Button,
@@ -19,6 +21,7 @@ import type {
 
 import EvolutionChart from "./EvolutionChart";
 import EvolutionTable from "./EvolutionTable";
+import { div } from "framer-motion/m";
 
 function formatCurrency(value: number) {
   return value.toLocaleString("pt-BR", {
@@ -190,7 +193,8 @@ export default function CompoundInterestCalculator() {
         </>
       )}
 
-    </div>
-  );
-  <Faq />
+      <Faq />
+      <Article />
+      <RelatedCalculators />
+    </div>  );
 }
