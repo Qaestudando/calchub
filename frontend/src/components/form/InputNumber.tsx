@@ -10,8 +10,11 @@ export default function InputNumber({
   onChange,
 }: Props) {
   return (
-    <div className="flex flex-col gap-2">
-      <label>{label}</label>
+    <div>
+
+      <label className="mb-2 block text-sm font-semibold text-gray-700">
+        {label}
+      </label>
 
       <input
         type="number"
@@ -19,8 +22,9 @@ export default function InputNumber({
         onChange={(e) =>
           onChange(Number(e.target.value))
         }
-        className="rounded-lg border p-3"
+        className="w-full rounded-xl border border-gray-300 bg-gray-50 px-4 py-3 text-lg outline-none transition focus:border-blue-600 focus:bg-white"
       />
+
     </div>
   );
 }

@@ -1,6 +1,7 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
+import Faq from "./Faq";
 
 import {
   Button,
@@ -15,6 +16,16 @@ import {
 import type {
   CompoundInterestResponse,
 } from "./types";
+
+import EvolutionChart from "./EvolutionChart";
+import EvolutionTable from "./EvolutionTable";
+
+function formatCurrency(value: number) {
+  return value.toLocaleString("pt-BR", {
+    style: "currency",
+    currency: "BRL",
+  });
+}
 
 export default function CompoundInterestCalculator() {
   const [capital, setCapital] = useState<number | "">(1000);
@@ -48,68 +59,138 @@ export default function CompoundInterestCalculator() {
     }
   }
 
+  function handleClear() {
+    setCapital(1000);
+    setRate(1);
+    setMonths(12);
+    setMonthlyContribution(0);
+    setResult(null);
+  }
+
+  const chartData = useMemo(() => {
+    const data = [];
+
+    let amount = Number(capital);
+
+    for (let month = 1; month <= Number(months); month++) {
+      amount =
+        amount * (1 + Number(rate) / 100) +
+        Number(monthlyContribution);
+
+      data.push({
+        month,
+        value: Number(amount.toFixed(2)),
+      });
+    }
+
+    return data;
+  }, [
+    capital,
+    months,
+    rate,
+    monthlyContribution,
+  ]);
+
   return (
-    <div className="mx-auto flex max-w-4xl flex-col gap-6 p-8">
-      <h1 className="text-4xl font-bold">
-        Calculadora de Juros Compostos
-      </h1>
+    <div className="space-y-10">
 
-      <div className="grid gap-4 md:grid-cols-2">
-        <InputNumber
-          label="Capital Inicial"
-          value={capital}
-          onChange={setCapital}
-        />
+      <section className="rounded-3xl border border-gray-200 bg-white p-8 shadow-sm">
 
-        <InputNumber
-          label="Taxa (%)"
-          value={rate}
-          onChange={setRate}
-        />
+        <h2 className="text-2xl font-bold">
+          Simule seu investimento
+        </h2>
 
-        <InputNumber
-          label="Meses"
-          value={months}
-          onChange={setMonths}
-        />
+        <p className="mt-2 text-gray-600">
+          Informe os dados abaixo para calcular a evolução do seu patrimônio.
+        </p>
 
-        <InputNumber
-          label="Aporte Mensal"
-          value={monthlyContribution}
-          onChange={setMonthlyContribution}
-        />
-      </div>
+        <div className="mt-8 grid gap-6 md:grid-cols-2">
 
-      <Button
-        type="button"
-        onClick={handleCalculate}
-      >
-        {loading ? "Calculando..." : "Calcular"}
-      </Button>
+          <InputNumber
+            label="Capital Inicial"
+            value={capital}
+            onChange={setCapital}
+          />
+
+          <InputNumber
+            label="Taxa de Juros (% ao mês)"
+            value={rate}
+            onChange={setRate}
+          />
+
+          <InputNumber
+            label="Quantidade de Meses"
+            value={months}
+            onChange={setMonths}
+          />
+
+          <InputNumber
+            label="Aporte Mensal"
+            value={monthlyContribution}
+            onChange={setMonthlyContribution}
+          />
+
+        </div>
+
+        <div className="mt-8 flex flex-col gap-4 sm:flex-row">
+
+          <Button
+            type="button"
+            onClick={handleCalculate}
+          >
+            {loading
+              ? "Calculando..."
+              : "Calcular"}
+          </Button>
+
+          <Button
+            type="button"
+            onClick={handleClear}
+          >
+            Limpar
+          </Button>
+
+        </div>
+
+      </section>
 
       {result && (
-        <div className="grid gap-4 md:grid-cols-2">
-          <ResultCard
-            title="Valor Final"
-            value={`R$ ${result.final_amount.toFixed(2)}`}
+        <>
+          <section className="grid gap-6 md:grid-cols-2 xl:grid-cols-4">
+
+            <ResultCard
+              title="Valor Final"
+              value={formatCurrency(result.final_amount)}
+            />
+
+            <ResultCard
+              title="Juros Obtidos"
+              value={formatCurrency(result.interest_earned)}
+            />
+
+            <ResultCard
+              title="Total Investido"
+              value={formatCurrency(result.total_invested)}
+            />
+
+            <ResultCard
+              title="Rentabilidade"
+              value={`${result.profitability.toFixed(2)}%`}
+            />
+
+          </section>
+
+          <EvolutionChart
+            data={chartData}
           />
 
-          <ResultCard
-            title="Juros Obtidos"
-            value={`R$ ${result.interest_earned.toFixed(2)}`}
+          <EvolutionTable
+            data={chartData}
           />
-
-          <ResultCard
-            title="Total Investido"
-            value={`R$ ${result.total_invested.toFixed(2)}`}
-          />
-
-          <ResultCard
-            title="Rentabilidade"
-            value={`${result.profitability}%`}
-          />
-        </div>
+        </>
       )}
+
     </div>
   );
+  <Faq />
 }
