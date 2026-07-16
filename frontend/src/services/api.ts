@@ -35,6 +35,13 @@ export interface PercentageResponse {
   result: number;
 }
 
+export interface RuleOfThreeResponse {
+  a: number;
+  b: number;
+  c: number;
+  result: number;
+}
+
 export async function calculateCompoundInterest(
   capital: number,
   rate: number,
@@ -96,6 +103,28 @@ export async function calculatePercentage(
 
   if (!response.ok) {
     throw new Error("Erro ao calcular porcentagem.");
+  }
+
+  return await response.json();
+}
+
+export async function calculateRuleOfThree(
+  a: number,
+  b: number,
+  c: number,
+): Promise<RuleOfThreeResponse> {
+  const params = new URLSearchParams({
+    a: a.toString(),
+    b: b.toString(),
+    c: c.toString(),
+  });
+
+  const response = await fetch(
+    `${API_URL}/rule-of-three?${params.toString()}`
+  );
+
+  if (!response.ok) {
+    throw new Error("Erro ao calcular regra de três.");
   }
 
   return await response.json();

@@ -3,3 +3,10 @@ export interface PercentageResponse {
   percentage: number;
   result: number;
 }
+
+export interface RuleOfThreeResponse {
+  a: number;
+  b: number;
+  c: number;
+  result: number;
+}

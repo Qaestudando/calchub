@@ -3,6 +3,7 @@ from fastapi import APIRouter
 from app.calculators.compound_interest import calculate as calculate_compound_interest
 from app.calculators.simple_interest import calculate as calculate_simple_interest
 from app.calculators.percentage import calculate as calculate_percentage
+from app.calculators.rule_of_three import calculate as calculate_rule_of_three
 
 router = APIRouter()
 
@@ -42,4 +43,16 @@ def percentage(
     return calculate_percentage(
         value=value,
         percentage=percentage,
+    )
+
+@router.get("/rule-of-three")
+def rule_of_three(
+    a: float,
+    b: float,
+    c: float,
+):
+    return calculate_rule_of_three(
+        a=a,
+        b=b,
+        c=c,
     )
