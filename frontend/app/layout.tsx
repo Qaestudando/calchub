@@ -1,5 +1,15 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
+import { Inter } from "next/font/google";
+
 import "./globals.css";
+
+import Header from "@/src/components/layout/header";
+import Footer from "@/src/components/layout/footer";
+
+const inter = Inter({
+  subsets: ["latin"],
+  display: "swap",
+});
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://calchub.com.br"),
@@ -10,22 +20,20 @@ export const metadata: Metadata = {
   },
 
   description:
-    "O CalcHub reúne calculadoras financeiras, matemáticas, saúde e conversores em uma plataforma rápida, gratuita e fácil de usar.",
+    "Portal brasileiro de calculadoras online gratuitas. Juros Compostos, Juros Simples, Porcentagem, Regra de Três, IMC, Financiamento e muito mais.",
 
   keywords: [
     "calculadora",
-    "calculadoras online",
+    "calculadora online",
     "juros compostos",
     "juros simples",
-    "financiamento",
+    "porcentagem",
     "regra de três",
-    "IMC",
-    "calculadora financeira",
-    "conversor",
-    "CalcHub",
+    "imc",
+    "financiamento",
+    "calc",
+    "calchub",
   ],
-
-  applicationName: "CalcHub",
 
   authors: [
     {
@@ -37,31 +45,24 @@ export const metadata: Metadata = {
 
   publisher: "CalcHub",
 
-  robots: {
-    index: true,
-    follow: true,
-    nocache: false,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-
   alternates: {
     canonical: "/",
   },
 
   openGraph: {
     type: "website",
+
     locale: "pt_BR",
+
     url: "https://calchub.com.br",
+
     siteName: "CalcHub",
+
     title: "CalcHub | Calculadoras Online Gratuitas",
+
     description:
-      "Calcule investimentos, financiamentos, IMC, porcentagem, regra de três e muito mais gratuitamente.",
+      "Portal brasileiro de calculadoras online gratuitas.",
+
     images: [
       {
         url: "/og-image.png",
@@ -74,10 +75,26 @@ export const metadata: Metadata = {
 
   twitter: {
     card: "summary_large_image",
+
     title: "CalcHub",
+
     description:
-      "Plataforma brasileira de calculadoras online gratuitas.",
+      "Portal brasileiro de calculadoras online.",
+
     images: ["/og-image.png"],
+  },
+
+  robots: {
+    index: true,
+    follow: true,
+
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-video-preview": -1,
+      "max-snippet": -1,
+    },
   },
 
   icons: {
@@ -87,6 +104,12 @@ export const metadata: Metadata = {
   },
 };
 
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  themeColor: "#2563eb",
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
@@ -94,7 +117,21 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-BR">
-      <body>{children}</body>
+
+      <body
+        className={`${inter.className} bg-gray-50 text-gray-900 antialiased`}
+      >
+
+        <Header />
+
+        <main className="min-h-screen">
+          {children}
+        </main>
+
+        <Footer />
+
+      </body>
+
     </html>
   );
 }

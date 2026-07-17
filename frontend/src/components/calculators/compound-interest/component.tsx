@@ -103,7 +103,7 @@ export default function CompoundInterestCalculator() {
           Simule seu investimento
         </h2>
 
-        <p className="mt-2 text-gray-600">
+        <p className="mt-2 text-gray-000">
           Informe os dados abaixo para calcular a evolução do seu patrimônio.
         </p>
 
