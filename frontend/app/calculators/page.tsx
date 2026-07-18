@@ -1,20 +1,16 @@
 import Link from "next/link";
 import type { Metadata } from "next";
-
 import Card from "@/src/components/ui/Card";
 import CalculatorHero from "@/src/components/layout/CalculatorHero";
 import CalculatorLayout from "@/src/components/layout/CalculatorLayout";
-
-import { calculators } from "@/src/constants/calculators";
-
-export const metadata: Metadata = {
-  title: "Todas as Calculadoras | CalcHub",
-  description:
-    "Encontre calculadoras financeiras, matemáticas, de saúde e muito mais.",
-  alternates: {
-    canonical: "/calculators",
-  },
-};
+import { calculators } from "@/src/constants/Calculators"; {
+  title: "Todas as Calculadoras | CalcHub"
+    description:
+      "Encontre calculadoras financeiras, matemáticas, de saúde e muito mais."
+    alternates: {
+      canonical: "/calculators"
+          }
+  };
 
 export default function CalculatorsPage() {
   return (
