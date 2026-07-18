@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import Card from "@/src/components/ui/Card";
 import CalculatorHero from "@/src/components/layout/CalculatorHero";
 import CalculatorLayout from "@/src/components/layout/CalculatorLayout";
-import { calculators } from "@/src/constants/Calculators"; {
+import { calculators } from "@/src/constants/calculators"; {
   title: "Todas as Calculadoras | CalcHub"
     description:
       "Encontre calculadoras financeiras, matemáticas, de saúde e muito mais."
